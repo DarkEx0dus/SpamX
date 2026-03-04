@@ -1,2 +1,2 @@
-# SpamX
-SpamX maid by me!
+# SpamExo
+SpamExo maid by me!
