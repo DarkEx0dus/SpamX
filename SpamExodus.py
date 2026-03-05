@@ -5,19 +5,34 @@ import random
 import time
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import os
+import subprocess
 
+def check_install(command, install_command):
+    result = subprocess.run(f"which {command}", shell=True, stdout=subprocess.PIPE)
+    if result.stdout.decode().strip() == "":
+        print(f"[+] Installing {command}...")
+        os.system(install_command)
+    else:
+        print(f"[✓] {command} already installed.")
+
+def install_dependencies():
+    os.system("pkg update -y")
+    check_install("figlet", "pkg install figlet -y")
+    check_install("ruby", "pkg install ruby -y")
+    check_install("lolcat", "gem install lolcat")
 
 def banner():
-    print(r"""
-███████╗██████╗  █████╗   ███╗   ███╗██╗  ██╗
-██╔════╝██╔══██╗██╔══██╗████╗  ████║╚██╗██╔╝
-███████╗██████╔╝███████║██╔████╔ ██║  ╚███╔╝ 
-╚════██║██╔═══╝ ██╔══██║██║╚██╔  ██║  ██╔██╗ 
-███████║██║      ██║  ██║██║ ╚═╝  ██║██╔╝   ██╗
-╚══════╝╚═╝      ╚═╝  ╚═╝╚═╝       ╚═╝╚═╝    ╚═╝
+    os.system("clear")
+    os.system("figlet SPAMX | lolcat")
 
-Created By: DarkEx0dus
-""")
+    print("""created by: DarkEx0dus """)
+
+def main():
+    install_dependencies()
+    banner()
+
+    print("Program started...")
 
 
 def load_html(file):
